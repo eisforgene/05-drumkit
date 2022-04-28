@@ -4,14 +4,18 @@ let drumButtons = document.querySelectorAll('.drum').length;
 for (let i = 0; i < drumButtons; i++) {
     document.querySelectorAll('.drum')[i].addEventListener('click', function () {
         let buttonHTML = this.innerHTML;
-
+        
         makeSound(buttonHTML);
+
+        buttonAnimation(buttonHTML);
     })
 }
 
 // Check Keyboard press
 document.addEventListener('keydown', function(e) {
     makeSound(e.key);
+
+    buttonAnimation(e.key);
 })
 
 
@@ -48,4 +52,13 @@ let makeSound = function(key) {
         default: 
             console.log(key)
     }
+}
+
+function buttonAnimation(currentKey) {
+    var activeButton = document.querySelector("." + currentKey)
+    activeButton.classList.add('pressed');
+    setTimeout(function() {
+        activeButton.classList.remove('pressed');
+    }, 100)
+    
 }
